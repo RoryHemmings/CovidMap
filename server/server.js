@@ -27,13 +27,20 @@ app.get('/poll', (req, res) => {
 
 app.post('/poll', (req, res) => {
     console.log("Incoming post request at /poll");
+    levelIndex = req.body.level;
     const data = {
         county: req.body.county,
-        level: req.body.level
+        level: []
     };
-    counties.insert(data).then(new_data => {
-        res.json({new_data: new_data});
-    });
+    counties.findOne({county: data.county})
+    .then(doc => {
+        data.level = doc.level;
+        data.level[levelIndex] += 1;
+    })
+    .then(temp => {
+        counties.update({county: data.county}, {$set:data}).then(new_data => {
+            res.json({new_data: data});
+    })});
 });
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
