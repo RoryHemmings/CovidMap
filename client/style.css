@@ -1,3 +1,7 @@
 p {
     font-size: 100px;
 }
+
+#map {
+    height: 900px;
+}
