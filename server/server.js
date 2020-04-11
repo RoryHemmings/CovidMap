@@ -6,4 +6,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/polldata', (req, res) => {
+    res.send("");
+});
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
