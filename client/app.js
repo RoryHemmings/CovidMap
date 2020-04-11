@@ -1,4 +1,7 @@
 
+let currentDate = new Date();
+currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
+
 function updatePoll(county, level) {
     let data = {
         county: county,
@@ -36,9 +39,10 @@ function style() {
 }
 
 function highlightCounty(e) {
-    let county = e.target;
+    let layer = e.target;
+    console.log(layer.covidData.name + layer.covidData.cases);
 
-    county.setStyle({
+    layer.setStyle({
         weight: 3,
         fillOpacity: 0.7
     });
@@ -50,6 +54,20 @@ function highlightCounty(e) {
 
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
+}
+
+function getCovidData(feature) {
+    let cases = infectionData.find(i => i['County Name'].toLowerCase() == (feature.properties.NAME + " " + feature.properties.LSAD).toLowerCase());
+    if (cases == undefined) {
+        console.log(feature.properties.NAME + " " + feature.properties.LSAD);
+        cases = "N/A"
+    } else {
+        cases = cases[currentDate]
+    }
+    return {
+        name: feature.properties.NAME + " " + feature.properties.LSAD + ", ",
+        cases: cases
+    }
 }
 
 // Create Map
@@ -69,6 +87,7 @@ let geojson = L.geoJson(boundary_data, {
             mouseover: highlightCounty,
             mouseout: resetHighlight
         });
+        layer.covidData = getCovidData(feature);
     }
 }).addTo(map);
 
