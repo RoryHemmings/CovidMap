@@ -1,4 +1,31 @@
 
+function updatePoll(county, level) {
+    let data = {
+        county: county,
+        level: level
+    };
+
+    fetch('http://localhost:3000/poll', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(res => {
+        console.log(res);
+    })
+}
+
+function getPollData() {
+    fetch('http://localhost:3000/poll')
+    .then(response => response.json())
+    .then(res => {
+        console.log(res);
+    })
+}
+
 const map = L.map('map').setView([38.0902, -99.7129], 5);
 
 function style() {
