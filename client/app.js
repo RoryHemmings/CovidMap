@@ -71,3 +71,24 @@ let geojson = L.geoJson(boundary_data, {
         });
     }
 }).addTo(map);
+
+
+//const censusLink = 'https://api.census.gov/data/2017/acs/acs5?key=d959bc33a6691c61e0d48314c18455641c7421d0&get=B01003_001E&for=zip%20code%20tabulation%20area:'; // add zip code to end
+
+// const censusLink = 'https://api.census.gov/data/2014/pep/natstprc?get=DENSITY,REGION,POP&DATE_=7&for=state:*&key=d959bc33a6691c61e0d48314c18455641c7421d0'; // for all states: "state:*" // density
+
+// get US Census Data (population)
+function getPopulation(zipcode) {
+    let url = censusLink;// + zipcode;
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data[1][0]);
+        })
+        .catch(function (error) {
+            console.log(JSON.stringify(error));
+        });   
+}
+
+
+getPopulation(91214); // zip code
