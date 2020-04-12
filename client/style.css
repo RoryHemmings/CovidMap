@@ -136,14 +136,11 @@ body {
 
 
 #map {
-    height: /*900px*/  100%;
-    margin-left: 30%; /*SOMETHING WEIRD IS HAPPENING HEREEEEEEE :((D((D((D(D(D(*/
+    height: 100%;/*900px*/ 
     width: 70%;
     left:30%;
-    top:0;
     padding:0;
     margin:0;
-    z-index: -9999;
 }
 
 
@@ -166,7 +163,7 @@ body {
     right:100%;
     height:100%;
     left:0;
-    z-index: 99;
+    z-index: 9999;
     right:0;
     margin:0;
     padding:0;
