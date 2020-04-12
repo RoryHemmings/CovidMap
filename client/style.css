@@ -143,8 +143,22 @@ body {
     margin:0;
 }
 
+#cancel-button {
+    padding: 10px;
+    margin:10px 0;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    background-color: rgb(201, 53, 75);
+    color: black;
+    border-radius: 25px;
+}
 
-#ratingInputBox{
+#cancel-button:hover {
+    background-color: red;
+}
+
+#ratingInputBox {
     width:100%;
     height:auto;
     left:0;
@@ -197,7 +211,7 @@ body {
     border-radius: 25px;
 }
 #submit-button:hover{
-    border-width: 5px;
+    /* border-width: 5px; */
     background-color: #ddf;
 }
 

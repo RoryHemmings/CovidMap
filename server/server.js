@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const db = monk('localhost/covidmap');
+const db = monk('mongodb://rory:uJ4J7DnFftp62nz@ds041177.mlab.com:41177/commentboard');
 const counties = db.get('counties');
 
 app.use(cors());

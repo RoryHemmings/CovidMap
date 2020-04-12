@@ -16,93 +16,11 @@
             crossorigin=""
         >
         <link href="style.css" rel="stylesheet">
-        <script> // frontend
-/*
-        function sb_open() {
-          document.getElementById("sidebar").style.display = "block";
-        }
-        
-        function sb_close() {
-          document.getElementById("sidebar").style.display = "none";
-        }*/
-                var temporaryRating = null, tempCounty = null;
-                function setTemporaryRating(rating){
-                        temporaryRating = rating;
-                        switch(rating){
-                                case 5: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Very Strict Regulations";
-                                        break;
-                                case 4: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Strict Regulations";
-                                        break;
-                                case 3: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Moderate Regulations";
-                                        break;
-                                case 2: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Relaxed Regulations";
-                                        break;
-                                case 1: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": No Regulations (totally safe)";
-                                        break;
-                                case 0: document.getElementById("ratingBoxTitle").innerHTML = tempCounty;
-                                        break;
-                        }
-                        if(tempCounty == null){
-                                document.getElementById("ratingBoxTitle").innerHTML = "No County Selected";
-                        }
-                        if(rating > 0) {
-                                document.getElementById("star-1").style.filter = "brightness(100%)";
-                        }
-                        else{
-                                document.getElementById("star-1").style.filter = "brightness(50%)";
-                        }
-
-                        if(rating > 1) {
-                                document.getElementById("star-2").style.filter = "brightness(100%)";
-                        }
-                        else{
-                                document.getElementById("star-2").style.filter = "brightness(50%)";
-                        }
-
-                        if(rating > 2) {
-                                document.getElementById("star-3").style.filter = "brightness(100%)";
-                        }
-                        else{
-                                document.getElementById("star-3").style.filter = "brightness(50%)";
-                        }
-
-                        if(rating > 3) {
-                                document.getElementById("star-4").style.filter = "brightness(100%)";
-                        }
-                        else{
-                                document.getElementById("star-4").style.filter = "brightness(50%)";
-                        }
-
-                        if(rating > 4) {
-                                document.getElementById("star-5").style.filter = "brightness(100%)";
-                        }
-                        else{
-                                document.getElementById("star-5").style.filter = "brightness(50%)";
-                        }
-
-                        
-                }
-                function openRatingBox(){
-                        this.setTemporaryRating(0);
-                        console.log("opened");
-                        document.getElementById("ratingInputDiv").style.display = "block";
-                }
-                function rate(){
-                        // send info to server
-                        console.log("I VOTED ;) ==> "+temporaryRating+" skulls");
-                        closeRatingBox();
-                }
-                function closeRatingBox(){
-                        document.getElementById("ratingInputDiv").style.display = "none";
-                }
-
-                //document.getElementById("ratingInputDiv").onclick=closeRatingBox;
-        </script>
     </head>
     <body>
         <div id="ratingInputDiv">
             <div id="ratingInputBox">
-                <a id="ratingBoxTitle">Las Vegas: Strict Regulations</a>
+                <a id="ratingBoxTitle">County: Strict Regulations</a>
                 <div id="rating-stars">
                     
 
@@ -115,10 +33,16 @@
                 <br>
                 <a
                     id="submit-button"
-                    onclick="closeRatingBox()"
+                    onclick="submitData()"
                     src=""
                     alt="close"
                 >Submit</a>
+                <a
+                    id="cancel-button"
+                    onclick="closeRatingBox()"
+                    src=""
+                    alt="close"
+                >Cancel</a>
                 <br>
             </div>
         </div>
@@ -142,7 +66,7 @@
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star"></span>
-                <p>How strict are social distancing measures in this county? Memebers of the community said this</p>
+                <p>How strict are social distancing measures in this county? Memebers of the community said this. <br>Click on county to select for social distancing review, then click the Add Resonse button to submit it.</p>
                 <div class="table">
                     <canvas id="chart">
                         
@@ -163,7 +87,90 @@
         <script src="populationData.js"></script>
         <script src="deathData.js"></script>
         <script src="app.js"></script>
-    </body>
+        <script> // frontend
+                /*
+                        function sb_open() {
+                          document.getElementById("sidebar").style.display = "block";
+                        }
+                        
+                        function sb_close() {
+                          document.getElementById("sidebar").style.display = "none";
+                        }*/
+                                var temporaryRating = null, tempCounty = null;
+                                function setTemporaryRating(rating){
+                                        temporaryRating = rating;
+                                        tempCounty = selectedCounty.covidData.name == "" ? "No County Selected" : selectedCounty.covidData.name;
+                                        switch(rating){
+                                                case 5: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Very Strict Regulations";
+                                                        break;
+                                                case 4: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Strict Regulations";
+                                                        break;
+                                                case 3: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Moderate Regulations";
+                                                        break;
+                                                case 2: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Relaxed Regulations";
+                                                        break;
+                                                case 1: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": No Regulations (totally safe)";
+                                                        break;
+                                                case 0: document.getElementById("ratingBoxTitle").innerHTML = tempCounty;
+                                                        break;
+                                        }
+                                        if(tempCounty == null){
+                                                document.getElementById("ratingBoxTitle").innerHTML = "No County Selected";
+                                        }
+                                        if(rating > 0) {
+                                                document.getElementById("star-1").style.filter = "brightness(100%)";
+                                        }
+                                        else{
+                                                document.getElementById("star-1").style.filter = "brightness(50%)";
+                                        }
+                
+                                        if(rating > 1) {
+                                                document.getElementById("star-2").style.filter = "brightness(100%)";
+                                        }
+                                        else{
+                                                document.getElementById("star-2").style.filter = "brightness(50%)";
+                                        }
+                
+                                        if(rating > 2) {
+                                                document.getElementById("star-3").style.filter = "brightness(100%)";
+                                        }
+                                        else{
+                                                document.getElementById("star-3").style.filter = "brightness(50%)";
+                                        }
+                
+                                        if(rating > 3) {
+                                                document.getElementById("star-4").style.filter = "brightness(100%)";
+                                        }
+                                        else{
+                                                document.getElementById("star-4").style.filter = "brightness(50%)";
+                                        }
+                
+                                        if(rating > 4) {
+                                                document.getElementById("star-5").style.filter = "brightness(100%)";
+                                        }
+                                        else{
+                                                document.getElementById("star-5").style.filter = "brightness(50%)";
+                                        }
+                
+                                        
+                                }
+                                function openRatingBox(){
+                                        this.setTemporaryRating(0);
+                                        document.getElementById("ratingInputDiv").style.display = "block";
+                                }
+                                function submitData(){
+                                        // send info to server
+                                        updatePoll(tempCounty, (5 - temporaryRating));
+                                        console.log("I VOTED ;) ==> "+temporaryRating+" skulls");
+                                        closeRatingBox();
+                                }
+                                function closeRatingBox(){
+                                        document.getElementById("ratingInputDiv").style.display = "none";
+                                }
+                
+                                //document.getElementById("ratingInputDiv").onclick = closeRatingBox;
+                        </script>
+    </body>uJ4J7DnFftp62nz
     <!--
         <br>
         <a class="sideinfo" id="population">Population: </a>

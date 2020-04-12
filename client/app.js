@@ -2,6 +2,12 @@
 let pollData;
 let chart;
 
+let selectedCounty = {
+    covidData: {
+        name: ""
+    }
+}
+
 // let currentDate = new Date();
 let currentDate = '4/10/20';
 let currentFullDate= '4/10/2020';
@@ -30,7 +36,7 @@ function updatePoll(county, level) {
 
     fetch('http://localhost:3000/poll', {
         method: 'POST',
-        headers: {
+        headers: {uJ4J7DnFftp62nz
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -79,6 +85,34 @@ function style(feature, color) {
         weight: 1,
         fillOpacity: 0.7
     };
+}
+
+function selectCounty(e) {
+    let layer = e.target;
+
+    if (selectedCounty.covidData.name != "") {
+        selectedCounty.setStyle({
+            color: "black",
+            weight: 1,
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            selectedCounty.bringToFront();
+        }
+    }
+
+    layer.setStyle({
+        color: "green",
+        weight: 5,
+        fillOpacity: 0.9
+    });
+
+    selectedCounty = layer;
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
 }
 
 function highlightCounty(e) {
@@ -131,13 +165,15 @@ function highlightCounty(e) {
 function resetHighlight(e) {
     let layer = e.target;
 
-    layer.setStyle({
-        weight: 1,
-        fillOpacity: 0.7
-    });
+    if (layer.covidData.name != selectedCounty.covidData.name) {
+        layer.setStyle({
+            weight: 1,
+            fillOpacity: 0.7
+        });
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
     }
 }
 
@@ -194,7 +230,8 @@ let geojson = L.geoJson(boundary_data, {
         let temp = getCovidData(feature, layer);
         layer.on({
             mouseover: highlightCounty,
-            mouseout: resetHighlight
+            mouseout: resetHighlight,
+            click: selectCounty
         });
         layer.covidData = temp;
         layer.setStyle(style(feature, temp.color));
