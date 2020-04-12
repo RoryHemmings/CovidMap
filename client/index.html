@@ -66,8 +66,9 @@
                         
                 }
                 function openRatingBox(){
-                        setTemporaryRating(0);
-                        document.getElementById("ratingInputBox").style.display = "block";
+                        this.setTemporaryRating(0);
+                        console.log("opened");
+                        document.getElementById("ratingInputDiv").style.display = "block";
                 }
                 function rate(){
                         // send info to server
@@ -75,21 +76,23 @@
                         closeRatingBox();
                 }
                 function closeRatingBox(){
-                        document.getElementById("ratingInputBox").style.display = "none";
+                        document.getElementById("ratingInputDiv").style.display = "none";
                 }
+
+                //document.getElementById("ratingInputDiv").onclick=closeRatingBox;
         </script>
     </head>
     <body>
-        <div id="ratingInputDiv" onclick="closeRatingBox()">
+        <div id="ratingInputDiv">
             <div id="ratingInputBox">
                 <div id="rating-stars">
                     
 
-                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
-                        <img id="star-2" class="flippedRatingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
-                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
-                        <img id="star-2" class="flippedRatingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
-                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(1)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-2" class="flippedRatingStar" onclick="setTemporaryRating(2)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-3" class="ratingStar" onclick="setTemporaryRating(3)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-4" class="flippedRatingStar" onclick="setTemporaryRating(4)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-5" class="ratingStar" onclick="setTemporaryRating(5)" src = "imgs/hazardLevel.png"></img>
                 </div>
                 <br>
                 <a
@@ -127,7 +130,7 @@
                     </canvas>
                 </div>
             </div>
-            <button id="rateButton">Add Response</button>
+            <button id="rateButton" onclick="openRatingBox()">Add Response</button>
         </div>
         <div id="map"></div>
         <!-- jquery -->
