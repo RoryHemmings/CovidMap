@@ -1,11 +1,11 @@
 # CovidMap
 
 1. WATCH THE 
-[VIDEO](http://github.com)
+[VIDEO](https://youtu.be/sWnZFbtXg-A)
 !
 
 2. WATCH THE 
-[VIDEO PRESENTATION](http://github.com)
+[VIDEO PRESENTATION](https://youtu.be/ZfFW5CmELmI)
 !
 
 
