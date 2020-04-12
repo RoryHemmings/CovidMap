@@ -1,4 +1,6 @@
 
+let pollData;
+
 let currentDate = new Date();
 currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
 
@@ -14,6 +16,10 @@ function roundToTenths(x) {
 }
 
 function updatePoll(county, level) {
+    if (pollData.find(i => i.county == county) == undefined) {
+        addEmptyCounty(county);
+    }
+
     let data = {
         county: county,
         level: level
@@ -29,6 +35,7 @@ function updatePoll(county, level) {
     .then(response => response.json())
     .then(res => {
         console.log(res);
+        getPollData();
     })
 }
 
@@ -37,6 +44,26 @@ function getPollData() {
     .then(response => response.json())
     .then(res => {
         console.log(res);
+        pollData = res;
+    })
+}
+
+function addEmptyCounty(county) {
+    let data = {
+        county: county,
+    };
+
+    fetch('http://localhost:3000/addPoll', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(res => {
+        console.log(res);
+        getPollData();
     })
 }
 
@@ -54,14 +81,29 @@ function style(feature, color) {
 function highlightCounty(e) {
     let layer = e.target;
     //console.log(layer.covidData.name + layer.covidData.cases);
-    let countyTempName = layer.covidData.name;
-    countyTempName = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
-    countyTempName = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
-    document.getElementById('sidebarsubtitle').innerHTML = countyTempName;
+    document.getElementById('sidebarsubtitle').innerHTML = layer.covidData.name;
     document.getElementById('infections').innerHTML = "Infections: " + formatBigNumber(layer.covidData.cases);
     document.getElementById('population').innerHTML = "Population: " + formatBigNumber(layer.covidData.population);
     document.getElementById('deaths').innerHTML = "Deaths: " + formatBigNumber(layer.covidData.deaths);
     document.getElementById('infection-rate').innerHTML = "Infection Rate: " + roundToTenths((layer.covidData.cases / layer.covidData.population) * 100) + "%";
+    document.getElementById('projected-deaths').innerHTML = "Projected Future Deaths: " + Math.floor(layer.covidData.cases * 0.0386);
+
+    let temp = pollData.find(i => layer.covidData.name == i.county);
+    if (temp == undefined) {
+        temp = [0, 0, 0, 0, 0];
+    }
+
+    let ctx = document.getElementById("chart");
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Very Strict', 'Strict', 'Moderate', 'Relaxed', 'None'],
+            datasets: [{
+                label: 'Amount of responses',
+                data: temp.level
+            }]
+        }
+    });
 
     layer.setStyle({
         weight: 3,
@@ -145,6 +187,29 @@ let geojson = L.geoJson(boundary_data, {
         layer.setStyle(style(feature, temp.color));
     }
 }).addTo(map);
+
+let ctx = document.getElementById("chart");
+let chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Very Strict', 'Strict', 'Moderate', 'Relaxed', 'None'],
+        datasets: [{
+            label: 'Amount of responses',
+            data: [0, 0, 0, 0, 0]
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+getPollData();
 
 //let key = "d959bc33a6691c61e0d48314c18455641c7421d0";
 //const censusLink = 'https://api.census.gov/data/2017/acs/acs5?key=d959bc33a6691c61e0d48314c18455641c7421d0&get=B01003_001E&for=zip%20code%20tabulation%20area:'; // add zip code to end

@@ -5,7 +5,8 @@ html, body {
 
 body {
     font-family: Roboto, Playfair Display, Arial, serif, Abril Fatface, cursive;
-
+    margin: 0;
+    padding: 0;
 }
 .sideinfo {
     background-color: rgb(173, 50, 46);
@@ -119,12 +120,16 @@ body {
     height:100%;*/
 }
 
+.progress-bar {
+    color: green;
+}
+
 
 #map {
     height: /*900px*/  100%;
     margin-left: 30%; /*SOMETHING WEIRD IS HAPPENING HEREEEEEEE :((D((D((D(D(D(*/
-    width: auto;
-    left:0;
+    width: 70%;
+    left:30%;
     top:0;
     padding:0;
     margin:0;
