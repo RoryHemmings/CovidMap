@@ -2,8 +2,15 @@
 let currentDate = new Date();
 currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
 
+let currentFullDate = new Date();
+currentFullDate = currentFullDate.getMonth() + 1 + '/' + (currentFullDate.getDate() - 1) + '/' + currentFullDate.getFullYear().toString();
+
 function formatBigNumber(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function roundToTenths(x) {
+    return Math.round(x * 100) / 100;
 }
 
 function updatePoll(county, level) {
@@ -51,10 +58,12 @@ function highlightCounty(e) {
     document.getElementById('sidebarsubtitle').innerHTML = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
     document.getElementById('infections').innerHTML = "Infections: " + formatBigNumber(layer.covidData.cases);
     document.getElementById('population').innerHTML = "Population: " + formatBigNumber(layer.covidData.population);
+    document.getElementById('deaths').innerHTML = "Deaths: " + formatBigNumber(layer.covidData.deaths);
+    document.getElementById('infection-rate').innerHTML = "Infection Rate: " + roundToTenths((layer.covidData.cases / layer.covidData.population) * 100) + "%";
 
     layer.setStyle({
         weight: 3,
-        fillOpacity: 1
+        fillOpacity: 0.9
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -93,12 +102,13 @@ function getColor(cases) {
 
 function getCovidData(feature, layer) {
     //let cases = infectionData.find(i => i['County Name'].toLowerCase() == (feature.properties.NAME + " " + feature.properties.LSAD).toLowerCase());
-    let cases = infectionData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5))
-    if (cases == undefined) {
-        cases = "N/A"
-    } else {
-        cases = cases[currentDate]
-    }
+    let cases = infectionData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5));
+    if (cases == undefined) cases = "N/A";
+    else cases = cases[currentDate];
+
+    let deaths = deathData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5));
+    if (deaths == undefined) {deaths = "N/A";}
+    else {deaths = deaths[currentFullDate];}
 
     let generalData = populationData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5));
     if (generalData == undefined) {generalData = {name: feature.properties.NAME + " " + feature.properties.LSAD, population: "N/A"};}
@@ -107,7 +117,8 @@ function getCovidData(feature, layer) {
         name: generalData['County Name'],
         cases: cases,
         color: getColor(cases),
-        population: generalData.population
+        population: generalData.population,
+        deaths: deaths
     }
 }
 
