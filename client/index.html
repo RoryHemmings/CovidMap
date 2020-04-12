@@ -32,23 +32,20 @@
 <body>
     <div id="sidebar">
         <div id = "sidebarheader">
-                <a id="sidebarsubtitle">Alhambra</a>
-                <!--<button class="sideBarXButton" onclick="sb_close()">Close &times;</button>-->
+                <a id="sidebarsubtitle">County: </a>
         </div>
-        <a class="sideinfo">Population: 1550 += 10 people</a>
-        <a class="sideinfo">Density: About 12 people per square meter</a>
-        <a class="sideinfo">Lamas in the house: 35%</a>
-        <a class="sideinfo">Infected (with COVID-19): 15550 ppl</a>
-        <a class="sideinfo">% Infected (with COVID-19): 2%</a>
-        <a class="sideinfo">Died (by COVID-19): 1 person</a>
-        <a class="sideinfo">% Died (by COVID-19): .00000001%</a>
-        <a class="sideinfo">Rating (**): Do not worry, a fly<br>could do you more harm</a>
+        <a class="sideinfo" id="population">Population: </a>
+        <a class="sideinfo" id="pop-den">Density: About 12 people per square meter</a>
+        <a class="sideinfo" id="elderly">Lamas in the house: 35%</a>
+        <a class="sideinfo" id="infections">Confirmed cases: </a>
+        <a class="sideinfo" id="deaths">Died (by COVID-19): 1 person</a>
+        <a class="sideinfo" id="death-rate">% Died (by COVID-19): .00000001%</a>
+        <a class="sideinfo" id="social-distancing-measures">Rating (**): Do not worry, a fly<br>could do you more harm</a>
         <button id="rateButton">RATE</button>
 
     </div>
-    <div id="content">
-        <div id="map"></div>
-    </div>
+
+    <div id="map"></div>
 
     <!-- jquery -->
     <script
@@ -59,8 +56,11 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
+
+    <script src="papaparse.min.js"></script>
     <script src="boundarydata.js"></script>
     <script src="countydata.js"></script>
+    <script src="populationData.js"></script>
             
     <script src="app.js"></script>
 
