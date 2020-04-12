@@ -5,12 +5,9 @@ html,body{
 body {
     padding: 0;
     margin: 0;
-    font-family: Playfair Display, Arial, serif, Abril Fatface,cursive;
+    font-family: Roboto, Playfair Display, Arial, serif, Abril Fatface,cursive;
 }
 
-p {
-    font-size: 100px;
-}
 .sideinfo{
     background-color: rgb(173, 50, 46);
     color: white;
@@ -26,7 +23,7 @@ p {
     text-align: left;
     text-decoration: none;*/
     display: grid;
-    font-size: 12px;
+    font-size: 16px;
 
     width: 84%;
     padding: 10px 8% 6px 8%;
@@ -40,7 +37,7 @@ p {
     position: absolute;
     z-index: 3;
     color: #f13;
-    background-color: #f65;
+    background-color: rgb(173, 50, 46);
     overflow-x: hidden; 
     display: table;
     left:0;
@@ -96,7 +93,7 @@ p {
     color:rgb(187, 30, 43);
     padding: 10px 20px;
     font-size: 36px;
-    font-family: Abril Fatface,cursive;
+    font-family: Roboto, Abril Fatface,cursive;
     position:center;
 }
 #sideBarXButton{
