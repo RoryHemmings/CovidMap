@@ -44,6 +44,3 @@ We learned how to program an interactive map for web development and we furthere
 ## What's next for Interactive Covid-19 Map
   * Daily Updates (Data)
   * Blocking users from spamming submissions
-
-##VIDEO
-Please go to https://github.com/RoryHemmings/CovidMap for the video presentation
