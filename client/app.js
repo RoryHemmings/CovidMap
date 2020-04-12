@@ -43,6 +43,9 @@ function style(feature, color) {
 function highlightCounty(e) {
     let layer = e.target;
     //console.log(layer.covidData.name + layer.covidData.cases);
+    document.getElementById('sidebarsubtitle').innerHTML = "County: " + layer.covidData.name;
+    document.getElementById('infections').innerHTML = "Infections: " + layer.covidData.cases;
+    document.getElementById('population').innerHTML = "Population: " + layer.covidData.population;
 
     layer.setStyle({
         weight: 3,
@@ -92,10 +95,14 @@ function getCovidData(feature, layer) {
         cases = cases[currentDate]
     }
 
+    let generalData = populationData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5));
+    if (generalData == undefined) {generalData = {name: feature.properties.NAME + " " + feature.properties.LSAD, population: "N/A"};}
+
     return {
-        name: feature.properties.NAME + " " + feature.properties.LSAD + ", ",
+        name: generalData['County Name'],
         cases: cases,
-        color: getColor(cases)
+        color: getColor(cases),
+        population: generalData.population
     }
 }
 
