@@ -1,11 +1,14 @@
 
 let pollData;
+let chart;
 
-let currentDate = new Date();
-currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
+// let currentDate = new Date();
+let currentDate = '4/10/20';
+let currentFullDate= '4/10/2020';
+// currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
 
-let currentFullDate = new Date();
-currentFullDate = currentFullDate.getMonth() + 1 + '/' + (currentFullDate.getDate() - 1) + '/' + currentFullDate.getFullYear().toString();
+// let currentFullDate = new Date();
+// currentFullDate = currentFullDate.getMonth() + 1 + '/' + (currentFullDate.getDate() - 1) + '/' + currentFullDate.getFullYear().toString();
 
 function formatBigNumber(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -94,16 +97,25 @@ function highlightCounty(e) {
         temp = [0, 0, 0, 0, 0];
     }
 
+    chart.destroy();
+
     let ctx = document.getElementById("chart");
-    let chart = new Chart(ctx, {
+    chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Very Strict', 'Strict', 'Moderate', 'Relaxed', 'None'],
             datasets: [{
                 label: 'Amount of responses',
-                data: temp.level
+                data: temp.level,
+                backgroundColor: [
+                    'green',
+                    'green',
+                    'green',
+                    'green',
+                    'green'
+                ],
             }]
-        }
+        },
     });
 
     layer.setStyle({
@@ -190,7 +202,7 @@ let geojson = L.geoJson(boundary_data, {
 }).addTo(map);
 
 let ctx = document.getElementById("chart");
-let chart = new Chart(ctx, {
+chart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Very Strict', 'Strict', 'Moderate', 'Relaxed', 'None'],

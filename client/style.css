@@ -105,6 +105,14 @@ body {
     position: center;
 }
 
+.sbst {
+    color: rgb(187, 30, 43);
+    padding: 10px 20px;
+    font-size: 36px;
+    font-family: Roboto, Abril Fatface, cursive;
+    position: center;
+}
+
 #sideBarXButton {
     padding: 5px 5px 5px 20px;
     float: right;
