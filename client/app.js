@@ -1,4 +1,7 @@
 
+let currentDate = new Date();
+currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
+
 function updatePoll(county, level) {
     let data = {
         county: county,
@@ -28,19 +31,22 @@ function getPollData() {
 
 const map = L.map('map').setView([38.0902, -99.7129], 5);
 
-function style() {
+function style(feature, color) {
     return {
+        fillColor: color,
+        color: "black",
         weight: 1,
-        fillOpacity: 0.3
+        fillOpacity: 0.7
     };
 }
 
 function highlightCounty(e) {
-    let county = e.target;
+    let layer = e.target;
+    //console.log(layer.covidData.name + layer.covidData.cases);
 
-    county.setStyle({
+    layer.setStyle({
         weight: 3,
-        fillOpacity: 0.7
+        fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -49,7 +55,48 @@ function highlightCounty(e) {
 }
 
 function resetHighlight(e) {
-    geojson.resetStyle(e.target);
+    let layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+function getColor(cases) {
+    if (cases == "N/A") {
+        return "white"
+    }
+    if (cases > 1000) return "#800026";
+    else if (cases > 500) return "#bd0026";
+    else if (cases > 250) return "#e31a1c";
+    else if (cases > 100) return "#fc4e2a";
+    else if (cases > 80) return "#fd8d3c";
+    else if (cases > 50) return "#feb24c";
+    else if (cases > 20) return "#fed976";
+    else if (cases > 10) return "#ffeda0";
+    else if (cases > 3) return "#ffffcc";
+    else return "#ffffff";
+}
+
+function getCovidData(feature, layer) {
+    //let cases = infectionData.find(i => i['County Name'].toLowerCase() == (feature.properties.NAME + " " + feature.properties.LSAD).toLowerCase());
+    let cases = infectionData.find(i => i.countyFIPS == feature.properties.GEO_ID.substr(-5))
+    if (cases == undefined) {
+        cases = "N/A"
+    } else {
+        cases = cases[currentDate]
+    }
+
+    return {
+        name: feature.properties.NAME + " " + feature.properties.LSAD + ", ",
+        cases: cases,
+        color: getColor(cases)
+    }
 }
 
 // Create Map
@@ -63,12 +110,14 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(map);
 
 let geojson = L.geoJson(boundary_data, {
-    style: style,
     onEachFeature: (feature, layer) => {
+        let temp = getCovidData(feature, layer);
         layer.on({
             mouseover: highlightCounty,
             mouseout: resetHighlight
         });
+        layer.covidData = temp;
+        layer.setStyle(style(feature, temp.color));
     }
 }).addTo(map);
 

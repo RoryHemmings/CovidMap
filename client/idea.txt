@@ -2,3 +2,4 @@ map that shows which areas are most likely to be in danger of coronavirus based 
 takes into account social distancing measures
 people can make an account where they login and provide information about their experience and it updates map accordingly
 show %of elderly
+make date adjustable
