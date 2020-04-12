@@ -8,15 +8,45 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin=""/>
   <link href="style.css" rel="stylesheet">
+
+  <script> // frontend
+        function sb_open() {
+          document.getElementById("sidebar").style.display = "block";
+        }
+        
+        function sb_close() {
+          document.getElementById("sidebar").style.display = "none";
+        }
+   </script>
 </head>
 
 <body>
+    <div id="sidebar">
+        <div id = "sidebarheader">
+                <a id="sidebarsubtitle">Alhambra</a>
+                <button class="sideBarXButton" onclick="sb_close()">Close &times;</button>
+        </div>
+        <a class="sideinfo">Population: 1550 += 10 people</a>
+        <a class="sideinfo">Density: About 12 people per square meter</a>
+        <a class="sideinfo">Lamas in the house: 35%</a>
+        <a class="sideinfo">Infected (with COVID-19): 15550 ppl</a>
+        <a class="sideinfo">% Infected (with COVID-19): 2%</a>
+        <a class="sideinfo">Died (by COVID-19): 1 person</a>
+        <a class="sideinfo">% Died (by COVID-19): .00000001%</a>
+        <a class="sideinfo">Rating (**): Do not worry, a fly<br>could do you more harm</a>
+        <button id="rateButton">RATE</button>
 
-    <div id="map"></div>
+    </div>
+
+    <div id="content">
+        <div id="map"></div>
+    </div>
 
     <!-- jquery -->
     <script

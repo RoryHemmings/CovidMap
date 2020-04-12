@@ -72,13 +72,18 @@ let geojson = L.geoJson(boundary_data, {
     }
 }).addTo(map);
 
-
+//let key = "d959bc33a6691c61e0d48314c18455641c7421d0";
 //const censusLink = 'https://api.census.gov/data/2017/acs/acs5?key=d959bc33a6691c61e0d48314c18455641c7421d0&get=B01003_001E&for=zip%20code%20tabulation%20area:'; // add zip code to end
 
 // const censusLink = 'https://api.census.gov/data/2014/pep/natstprc?get=DENSITY,REGION,POP&DATE_=7&for=state:*&key=d959bc33a6691c61e0d48314c18455641c7421d0'; // for all states: "state:*" // density
 
+//const cencusLink = "https://api.census.gov/data/2019/pep/population?get=DENSITY,REGION,STATE&DATE_=7for=county:*&key=" + key;
+//https://api.census.gov/data/2019/pep/population?key=d959bc33a6691c61e0d48314c18455641c7421d0&get=DENSITY&COUNTY=7&for=county:Alpine
+
+//ip%20code%20tabulation%20area:90807
+
 // get US Census Data (population)
-function getPopulation(zipcode) {
+/*function getPopulation(zipcode) {
     let url = censusLink;// + zipcode;
     fetch(url)
         .then((resp) => resp.json())
@@ -88,7 +93,7 @@ function getPopulation(zipcode) {
         .catch(function (error) {
             console.log(JSON.stringify(error));
         });   
-}
+}*/
 
 
-getPopulation(91214); // zip code
+//getPopulation(91214); // zip code
