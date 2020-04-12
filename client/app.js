@@ -48,7 +48,9 @@ function highlightCounty(e) {
     let layer = e.target;
     //console.log(layer.covidData.name + layer.covidData.cases);
     let countyTempName = layer.covidData.name;
-    document.getElementById('sidebarsubtitle').innerHTML = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
+    countyTempName = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
+    countyTempName = (countyTempName.includes(" "))? countyTempName.substr(0,countyTempName.indexOf(" ")) + "<br>" + countyTempName.substr(countyTempName.indexOf(" ")+1, countyTempName.length):countyTempName;
+    document.getElementById('sidebarsubtitle').innerHTML = countyTempName;
     document.getElementById('infections').innerHTML = "Infections: " + formatBigNumber(layer.covidData.cases);
     document.getElementById('population').innerHTML = "Population: " + formatBigNumber(layer.covidData.population);
 

@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="author" content="">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display&display=swap" rel="stylesheet">
-
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""/>
-  <link href="style.css" rel="stylesheet">
-
-  <script> // frontend
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="author" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display&display=swap" rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossorigin=""
+        >
+        <link href="style.css" rel="stylesheet">
+        <script> // frontend
 /*
         function sb_open() {
           document.getElementById("sidebar").style.display = "block";
@@ -27,45 +25,112 @@
         function sb_close() {
           document.getElementById("sidebar").style.display = "none";
         }*/
-   </script>
-</head>
-
-<body>
-    <div id="sidebar">
-        <div id = "sidebarheader">
-                <a id="sidebarsubtitle">County: </a>
+        </script>
+    </head>
+    <body>
+        <div id="sidebar">
+            <div id="sidebarheader">
+                <a id="sidebarsubtitle">County:</a>
+            </div>
+            <br>
+            <a class="sideinfo" id="population">Population:</a>
+            <a class="sideinfo" id="pop-den">Density: About 12 people per square meter</a>
+            <a class="sideinfo" id="elderly">Lamas in the house: 35%</a>
+            <a class="sideinfo" id="infections">Confirmed cases:</a>
+            <a class="sideinfo" id="deaths">Died (by COVID-19): 1 person</a>
+            <a class="sideinfo" id="death-rate">% Died (by COVID-19): .00000001%</a>
+            <br>
+            <div id="ratingSection">
+                <span class="heading">User Rating</span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <p>4.1 average based on 254 reviews.</p>
+                <hr style="border:3px solid #f1f1f1">
+                <div class="row">
+                    <div class="side">
+                        <div>5 star</div>
+                    </div>
+                    <div class="middle">
+                        <div class="bar-container">
+                            <div class="bar-5"></div>
+                        </div>
+                    </div>
+                    <div class="side right">
+                        <div>150</div>
+                    </div>
+                    <div class="row">
+                        <div class="side">
+                            <div>5 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-5"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>150</div>
+                        </div>
+                        <div class="side">
+                            <div>4 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-4"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>63</div>
+                        </div>
+                        <div class="side">
+                            <div>3 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-3"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>15</div>
+                        </div>
+                        <div class="side">
+                            <div>2 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-2"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>6</div>
+                        </div>
+                        <div class="side">
+                            <div>1 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-1"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="rateButton">RATE</button>
         </div>
-        <br>
-        <a class="sideinfo" id="population">Population: </a>
-        <a class="sideinfo" id="pop-den">Density: About 12 people per square meter</a>
-        <a class="sideinfo" id="elderly">Lamas in the house: 35%</a>
-        <a class="sideinfo" id="infections">Confirmed cases: </a>
-        <a class="sideinfo" id="deaths">Died (by COVID-19): 1 person</a>
-        <a class="sideinfo" id="death-rate">% Died (by COVID-19): .00000001%</a>
-        <a class="sideinfo" id="social-distancing-measures">Rating (**): Do not worry, a fly<br>could do you more harm</a>
-        <button id="rateButton">RATE</button>
-
-    </div>
-
-    <div id="map"></div>
-
-    <!-- jquery -->
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-    <!-- leaflet -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-            crossorigin=""></script>
-
-    <script src="papaparse.min.js"></script>
-    <script src="boundarydata.js"></script>
-    <script src="countydata.js"></script>
-    <script src="populationData.js"></script>
-            
-    <script src="app.js"></script>
-
-</body>
-
+        <div id="map"></div>
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <!-- leaflet -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+        <script src="papaparse.min.js"></script>
+        <script src="boundarydata.js"></script>
+        <script src="countydata.js"></script>
+        <script src="populationData.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>

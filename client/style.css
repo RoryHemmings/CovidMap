@@ -1,14 +1,13 @@
-html,body{
-    height:100%;
-    width:100%;
-}
-body {
-    padding: 0;
-    margin: 0;
-    font-family: Roboto, Playfair Display, Arial, serif, Abril Fatface,cursive;
+html, body {
+    height: 100%;
+    width: 100%;
 }
 
-.sideinfo{
+body {
+    font-family: Roboto, Playfair Display, Arial, serif, Abril Fatface, cursive;
+
+}
+.sideinfo {
     background-color: rgb(173, 50, 46);
     color: white;
     z-index: 8;
@@ -24,30 +23,34 @@ body {
     text-decoration: none;*/
     display: grid;
     font-size: 16px;
-
     width: 84%;
-    padding: 10px 8% 6px 8%;
+    padding: 6px 8% 6px 8%;
 }
-.sideinfo:hover{
+
+.sideinfo:hover {
     background-color: rgb(233, 153, 153);
 }
+
 #sidebar {
     height: 100%;
-    width: 25%;
+    width: 30%;
     position: absolute;
     z-index: 3;
     color: #f13;
     background-color: rgb(173, 50, 46);
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    /*overflow-y: scroll;*/
     display: table;
-    left:0;
-    top:0;
-    bottom:0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     opacity: 1;
 }
+
 #sidebar:hover {
-    opacity:1;
+    opacity: 1;
 }
+
 .box {
     margin: 10px 15px 15px 0px;
     padding: 5px 10px;
@@ -58,71 +61,155 @@ body {
     text-align: center;
     text-decoration: none;
     display: grid;
-
     font-size: 16px;
 }
-#rateButton{
+
+#rateButton {
     padding: 5px 10px;
     color: white;
     z-index: 8;
     text-align: center;
     display: grid;
-    float:middle;
+    float: middle;
     font-size: 36px;
-
     background-color: rgb(173, 50, 46);
     width: 84%;
     margin: 15px 8%;
 }
-#rateButton:hover{
+
+#rateButton:hover {
     background-color: rgb(236, 89, 84);
     padding: 12px 8px;
     width: 88%;
     margin: 11px 6%;
 }
-#sidebarheader{
+
+#sidebarheader {
     background-color: #f44;
     width: 100%;
-    padding-top: 45px;
-    padding-bottom: 35px;
+    padding-top: 35px;
+    padding-bottom: 25px;
     margin-bottom: 0px;
-    display:grid;
-    z-index:9;
+    display: grid;
+    z-index: 9;
 }
-#sidebarsubtitle{
-    color:rgb(187, 30, 43);
+
+#sidebarsubtitle {
+    color: rgb(187, 30, 43);
     padding: 10px 20px;
     font-size: 36px;
-    font-family: Roboto, Abril Fatface,cursive;
-    position:center;
+    font-family: Roboto, Abril Fatface, cursive;
+    position: center;
 }
-#sideBarXButton{
+
+#sideBarXButton {
     padding: 5px 5px 5px 20px;
-    float:right;
+    float: right;
 }
-#backgroundImage,#sidebar {
-    position:absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    opacity: 1;/*
+
+#sidebar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 1;
+    /*
     width: 100%;
     height:100%;*/
 }
-#content {
-    position:relative;
-    margin-left:0%;
-    height: /*900px*/100%;
-    width:100%;
-    left: 0%;
-    top:0%;
-    z-index:-1;
-}
+
 
 #map {
-    height: /*900px*/100%;
-    margin-left: 25%;
-    width:auto;
-
+    height: /*900px*/  100%;
+    margin-left: 30%; /*SOMETHING WEIRD IS HAPPENING HEREEEEEEE :((D((D((D(D(D(*/
+    width: auto;
+    left:0;
+    top:0;
+    padding:0;
+    margin:0;
 }
+
+
+
+#ratingSection{
+    background-color: rgb(241, 129, 125);
+    color: white;
+    z-index: 8;
+    display: grid;
+    widows: 90%;
+    margin: 0 5%;
+    padding: 10px 10px;
+    font-size:10px;
+    /*
+    width: 84%;
+    padding: 6px 5% 6px 5%;
+    margin: 0 6%;*/
+}
+#ratingSection p{
+    font-size: 10;
+}
+
+.heading {
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  
+  .fa {
+    font-size: 25px;
+  }
+  
+  .checked {
+    color: orange;
+  }
+  
+  /* Three column layout */
+  .side {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+  }
+  
+  .middle {
+    float: left;
+    width: 70%;
+    margin-top: 10px;
+  }
+  
+  /* Place text to the right */
+  .right {
+    text-align: right;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Individual bars */
+  .bar-5 {width: 60%; height: 18px; background-color: #4CAF50;}
+  .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+  .bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+  .bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+  .bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+  
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  @media (max-width: 400px) {
+    .side, .middle {
+      width: 100%;
+    }
+    /* Hide the right column on small screens */
+    .right {
+      display: none;
+    }
+  }
