@@ -25,9 +25,82 @@
         function sb_close() {
           document.getElementById("sidebar").style.display = "none";
         }*/
+                var temporaryRating = null;
+                function setTemporaryRating(rating){
+                        temporaryRating = rating;
+                        if(rating > 0) {
+                                document.getElementById("star-1").style.filter = "brightness(100%)";
+                        }
+                        else{
+                                document.getElementById("star-1").style.filter = "brightness(50%)";
+                        }
+
+                        if(rating > 1) {
+                                document.getElementById("star-2").style.filter = "brightness(100%)";
+                        }
+                        else{
+                                document.getElementById("star-2").style.filter = "brightness(50%)";
+                        }
+
+                        if(rating > 2) {
+                                document.getElementById("star-3").style.filter = "brightness(100%)";
+                        }
+                        else{
+                                document.getElementById("star-3").style.filter = "brightness(50%)";
+                        }
+
+                        if(rating > 3) {
+                                document.getElementById("star-4").style.filter = "brightness(100%)";
+                        }
+                        else{
+                                document.getElementById("star-4").style.filter = "brightness(50%)";
+                        }
+
+                        if(rating > 4) {
+                                document.getElementById("star-5").style.filter = "brightness(100%)";
+                        }
+                        else{
+                                document.getElementById("star-5").style.filter = "brightness(50%)";
+                        }
+
+                        
+                }
+                function openRatingBox(){
+                        setTemporaryRating(0);
+                        document.getElementById("ratingInputBox").style.display = "block";
+                }
+                function rate(){
+                        // send info to server
+                        console.log("I VOTED ;) ==> "+temporaryRating+" skulls");
+                        closeRatingBox();
+                }
+                function closeRatingBox(){
+                        document.getElementById("ratingInputBox").style.display = "none";
+                }
         </script>
     </head>
     <body>
+        <div id="ratingInputDiv" onclick="closeRatingBox()">
+            <div id="ratingInputBox">
+                <div id="rating-stars">
+                    
+
+                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-2" class="flippedRatingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-2" class="flippedRatingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                        <img id="star-1" class="ratingStar" onclick="setTemporaryRating(0)" src = "imgs/hazardLevel.png"></img>
+                </div>
+                <br>
+                <a
+                    id="submit-button"
+                    onclick="closeRatingBox()"
+                    src=""
+                    alt="close"
+                >Submit</a>
+                <br>
+            </div>
+        </div>
         <div id="sidebar">
             <div id="sidebarheader">
                 <a id="sidebarsubtitle">County:</a>
@@ -166,5 +239,4 @@
     <script src="app.js"></script>
 
 </body>-->
-
 </html>
