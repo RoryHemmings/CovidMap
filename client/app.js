@@ -2,6 +2,10 @@
 let currentDate = new Date();
 currentDate = currentDate.getMonth() + 1 + '/' + (currentDate.getDate() - 1) + '/' + currentDate.getFullYear().toString().substr(-2);
 
+function formatBigNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function updatePoll(county, level) {
     let data = {
         county: county,
@@ -44,8 +48,8 @@ function highlightCounty(e) {
     let layer = e.target;
     //console.log(layer.covidData.name + layer.covidData.cases);
     document.getElementById('sidebarsubtitle').innerHTML = "County: " + layer.covidData.name;
-    document.getElementById('infections').innerHTML = "Infections: " + layer.covidData.cases;
-    document.getElementById('population').innerHTML = "Population: " + layer.covidData.population;
+    document.getElementById('infections').innerHTML = "Infections: " + formatBigNumber(layer.covidData.cases);
+    document.getElementById('population').innerHTML = "Population: " + formatBigNumber(layer.covidData.population);
 
     layer.setStyle({
         weight: 3,
