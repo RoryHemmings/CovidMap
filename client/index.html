@@ -25,9 +25,26 @@
         function sb_close() {
           document.getElementById("sidebar").style.display = "none";
         }*/
-                var temporaryRating = null;
+                var temporaryRating = null, tempCounty = null;
                 function setTemporaryRating(rating){
                         temporaryRating = rating;
+                        switch(rating){
+                                case 5: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Very Strict Regulations";
+                                        break;
+                                case 4: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Strict Regulations";
+                                        break;
+                                case 3: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Moderate Regulations";
+                                        break;
+                                case 2: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": Relaxed Regulations";
+                                        break;
+                                case 1: document.getElementById("ratingBoxTitle").innerHTML = tempCounty + ": No Regulations (totally safe)";
+                                        break;
+                                case 0: document.getElementById("ratingBoxTitle").innerHTML = tempCounty;
+                                        break;
+                        }
+                        if(tempCounty == null){
+                                document.getElementById("ratingBoxTitle").innerHTML = "No County Selected";
+                        }
                         if(rating > 0) {
                                 document.getElementById("star-1").style.filter = "brightness(100%)";
                         }

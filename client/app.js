@@ -82,6 +82,7 @@ function highlightCounty(e) {
     let layer = e.target;
     //console.log(layer.covidData.name + layer.covidData.cases);
     document.getElementById('sidebarsubtitle').innerHTML = layer.covidData.name;
+    tempCounty = layer.covidData.name;
     document.getElementById('infections').innerHTML = "Infections: " + formatBigNumber(layer.covidData.cases);
     document.getElementById('population').innerHTML = "Population: " + formatBigNumber(layer.covidData.population);
     document.getElementById('deaths').innerHTML = "Deaths: " + formatBigNumber(layer.covidData.deaths);
