@@ -25,7 +25,7 @@ function roundToTenths(x) {
 }
 
 function updatePoll(county, level) {
-    if (pollData.find(i => i.county == county) == undefined) {
+    if (pollData == undefined || pollData.find(i => i.county == county) == undefined) {
         addEmptyCounty(county);
     }
 
@@ -36,7 +36,7 @@ function updatePoll(county, level) {
 
     fetch('http://localhost:3000/poll', {
         method: 'POST',
-        headers: {uJ4J7DnFftp62nz
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -126,7 +126,10 @@ function highlightCounty(e) {
     document.getElementById('infection-rate').innerHTML = "Infection Rate: " + roundToTenths((layer.covidData.cases / layer.covidData.population) * 100) + "%";
     document.getElementById('projected-deaths').innerHTML = "Projected Future Deaths: " + Math.floor(layer.covidData.cases * 0.0386);
 
-    let temp = pollData.find(i => layer.covidData.name == i.county);
+    let temp;
+    if (pollData != undefined) {
+        temp = pollData.find(i => layer.covidData.name == i.county);
+    }
     if (temp == undefined) {
         temp = [0, 0, 0, 0, 0];
     }
